@@ -5,6 +5,9 @@ require_parameters=0;
 is_forced_full_parameter=false;
 para_types=[];
 Render=function(){
+    if(TGET("freezed_home_page")){
+        return TGET("freezed_home_page");
+    }
     const Home=document.createElement("div");
     Home.classList.add("HomeWrapper");
     Home.id="Home";
@@ -36,5 +39,6 @@ Render=function(){
     }
     main_wrapper.appendChild(ability_list.fire_up);
     Home.appendChild(main_wrapper);
+    TSTORE("freezed_home_page",Home);
     return Home;
 }
