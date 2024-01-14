@@ -9,5 +9,5 @@ function GenerateKey(totalLength){
     const parentChars="1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
     const result=[];
     for(let i=0;i<totalLength;i++) result.push(parentChars[Math.round((Math.random()*500)%parentChars.length)]);
-    return result.join("");
+    return '_'+result.join("");
 }

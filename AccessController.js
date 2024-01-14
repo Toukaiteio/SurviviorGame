@@ -3,7 +3,8 @@ const Components=[
     './Scripts/Render/Component/ActionSelector.js',
     './Scripts/Render/Component/ActionButton.js',
     './Scripts/Render/Component/FlexExtendWrapper.js',
-    './Scripts/Render/Component/AbilityButton.js'
+    './Scripts/Render/Component/AbilityButton.js',
+    './Scripts/Render/Component/StoryTeller.js',
 ]
 const Pages=[
     './Scripts/Render/Page/HomePage.js'
@@ -51,6 +52,19 @@ function ApplyStyle(selector,cssText){
     _nStyle.innerHTML=`${selector}{${cssText}}`;
     document.head.appendChild(_nStyle);
     return _nStyle;
+}
+//Register DOM Updater
+function $Update(DOM,Component){
+    if(!DOM){
+        throw new Error("Trying to Update an Unknown DOM!");
+    }
+    const _DOM_parent=DOM.parentElement;
+    if(!_DOM_parent){
+        throw new Error("Trying to Update an Illegal DOM!");
+    }
+    const _new_DOM=ComponentRender(Component,...[...arguments].slice(2));
+    _DOM_parent.replaceChild(_new_DOM,DOM);
+    return _new_DOM;
 }
 const LoadedComponentList={};
 const LoadedPageList={};

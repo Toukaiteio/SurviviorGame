@@ -22,22 +22,13 @@ Render=function(){
     `
     const _action_selector=ComponentRender(LoadedComponentList["_component_action_selector"]);
     //render action selector
-    const ActionList={
-        "Survive":ComponentRender(LoadedComponentList["_component_action_button"],$$l.action_list_survive,"",()=>{BuildSurviviorPage();SwitchSelecting(ActionList.Survive);})
-    }
+    BuildActionList(_action_selector);
     ApplyStyle("button#_component_action_button.selecting",`
         background-color:var(--selectedBgColor) !important;
     `)
-    SwitchSelecting(ActionList.Survive);
-    for(const i in ActionList){
-        _action_selector.appendChild(ActionList[i]);
-    }
     Home.appendChild(_action_selector);
     const main_wrapper=ComponentRender(LoadedComponentList["_component_general_wrapper"]);
-    const ability_list={
-        "fire_up":ComponentRender(LoadedComponentList["_component_ability_button"],$$l.ability_fire_up,2,()=>{console.log("Hello,World!");})
-    }
-    main_wrapper.appendChild(ability_list.fire_up);
+    BuildSurviviorPage(main_wrapper);
     Home.appendChild(main_wrapper);
     TSTORE("freezed_home_page",Home);
     return Home;
