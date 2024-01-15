@@ -5,6 +5,7 @@ const Components=[
     './Scripts/Render/Component/FlexExtendWrapper.js',
     './Scripts/Render/Component/AbilityButton.js',
     './Scripts/Render/Component/StoryTeller.js',
+    './Scripts/Render/Component/MusicInfo.js',
 ]
 const Pages=[
     './Scripts/Render/Page/HomePage.js'

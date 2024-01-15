@@ -18,6 +18,7 @@ Render=function(){
     _story_teller.style.cssText=`
             height:fit-content;
             width:100%;
+            list-style-type:none;
         `;
     _story_teller.id="_component_story_teller";
     return _story_teller;

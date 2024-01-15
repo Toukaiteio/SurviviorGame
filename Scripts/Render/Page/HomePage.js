@@ -20,12 +20,19 @@ Render=function(){
         height:100vh;
         width:100vw;
     `
+    PreloadSoundResource("m1");
+    PlayBGM("m1",true);
     const _action_selector=ComponentRender(LoadedComponentList["_component_action_selector"]);
     //render action selector
     BuildActionList(_action_selector);
-    ApplyStyle("button#_component_action_button.selecting",`
-        background-color:var(--selectedBgColor) !important;
-    `)
+    if(!TGET("_home_page_styled")){
+        ApplyStyle("button#_component_action_button.selecting",`
+            background-color:var(--selectedBgColor) !important;
+        `)
+        ApplyStyle("body","overflow:hidden");
+        TSTORE("_home_page_styled",true);
+    }
+
     Home.appendChild(_action_selector);
     const main_wrapper=ComponentRender(LoadedComponentList["_component_general_wrapper"]);
     BuildSurviviorPage(main_wrapper);
