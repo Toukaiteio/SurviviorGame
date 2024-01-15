@@ -26,7 +26,7 @@ Render=function(){
     _abutton.classList.add(_thisClass);
     _abutton.classList.add(_thisClass2);
     _abutton.id="_component_ability_button";
-    ApplyStyle(`button#_component_ability_button.${_thisClass}.${_thisClass2}::after`,`
+    const _pc_1=ApplyStyle(`button#_component_ability_button.${_thisClass}.${_thisClass2}::after`,`
         content:"${_content}";
         position:absolute;
         top:0px;
@@ -41,7 +41,7 @@ Render=function(){
         justify-content:center;
     `+_beforeStyle);
     
-    ApplyStyle(`button#_component_ability_button.${_thisClass}.${_thisClass2}::before`,`
+    const _pc_2=ApplyStyle(`button#_component_ability_button.${_thisClass}.${_thisClass2}::before`,`
         content:"";
         position:absolute;
         top:0px;
@@ -84,5 +84,12 @@ Render=function(){
 
         
     };
+    // _abutton["_ori_remove"]=_abutton.remove;
+    // _abutton["remove"]=()=>{
+    //     _pc_1.remove();
+    //     _pc_2.remove();
+    //     _progress_controller.remove();
+    //     _abutton._ori_remove();
+    // }
     return _abutton;
 }

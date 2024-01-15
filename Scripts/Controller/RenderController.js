@@ -8,7 +8,8 @@ const Components=[
     './Scripts/Render/Component/MusicInfo.js',
 ]
 const Pages=[
-    './Scripts/Render/Page/HomePage.js'
+    './Scripts/Render/Page/HomePage.js',
+    './Scripts/Render/Page/BeforeStartPage.js'
 ]
 //Register Component Render
 function ComponentRender(Component){
@@ -45,6 +46,7 @@ function PageRender(Page){
         }
     }
     CurrentActivePage=Page.render(..._given_arguments)
+    document.body.appendChild(CurrentActivePage);
     return CurrentActivePage;
 }
 //Register Style Render
@@ -66,6 +68,17 @@ function $Update(DOM,Component){
     const _new_DOM=ComponentRender(Component,...[...arguments].slice(2));
     _DOM_parent.replaceChild(_new_DOM,DOM);
     return _new_DOM;
+}
+function $D_Update(DOM,DOM2){
+    if(!DOM){
+        throw new Error("Trying to Update an Unknown DOM!");
+    }
+    const _DOM_parent=DOM.parentElement;
+    if(!_DOM_parent){
+        throw new Error("Trying to Update an Illegal DOM!");
+    }
+    _DOM_parent.replaceChild(DOM2,DOM);
+    return DOM2;
 }
 const LoadedComponentList={};
 const LoadedPageList={};

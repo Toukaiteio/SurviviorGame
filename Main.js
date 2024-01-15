@@ -24,13 +24,13 @@ function Load_Script(link) {
         await Load_Script("./Scripts/Functions/DataStorage.js");
         await Load_Script("./Scripts/Functions/TempStorage.js");
         await Load_Script("./Scripts/Functions/GameEvents.js");
+        await Load_Script("./Scripts/Functions/InitItemMap.js");
         await Load_Script("./Scripts/Functions/GameValueInit.js");
         await Load_Script("./Scripts/Functions/Builder.js");
         
         await Load_Script("./Scripts/Controller/SoundController.js");
-        const MainPage="page_home_page";
-        const _main_page=PageRender(LoadedPageList[MainPage]);
-        document.body.appendChild(_main_page);
+        const MainPage="before_start_page";
+        PageRender(LoadedPageList[MainPage]);
     } catch (error) {
         Exception_Handler(error);
     }
