@@ -36,7 +36,7 @@ function event_fire_up(){
     _update_survive_page()
 }
 function _give_item(id,count=1){
-    if(GET("backpack_items").keys().includes(id)){
+    if(Object.keys(GET("backpack_items")).includes(id)){
         if(isOverlay(id)){
             GET("backpack_items")[id]["count"]+=count;
         }else{
@@ -49,6 +49,31 @@ function _give_item(id,count=1){
         }
     }else{
         GET("backpack_items")[id]=ITEM(id,count);
+    }
+}
+function _use_item(id,count=1,UUID=void 0){
+    if(Object.keys(GET("backpack_items")).includes(id)){
+        if(isOverlay(id) && GET("backpack_items")[id]["count"]-count>=0){
+            GET("backpack_items")[id]["count"]-=count;
+            if(GET("backpack_items")[id]["count"]<=0){
+                delete GET("backpack_items")[id];
+            }
+            return true;
+        }else if(UUID instanceof Array && UUID.length>=count){
+            
+            for(let i=0;i<count;i++){
+                if(GET("backpack_items")[id][UUID[i]])
+                    delete GET("backpack_items")[id][UUID[i]];
+            }
+            return true;
+        }else if(typeof UUID==="string" && GET("backpack_items")[id][UUID]){
+            delete GET("backpack_items")[id][UUID];
+            return true;
+        }else{
+            return false;
+        }
+    }else{
+        return false;
     }
 }
 function event_check_backpack(){
@@ -65,10 +90,41 @@ function event_check_backpack(){
                 new_logs.push(_newlog);
             }
         }
-        
-        
     }
     new_logs.push($$l._log_6);
     _push_log(new_logs);
     _update_survive_page()
+}
+function _function_eat_food(ItemID,UUID=void 0){
+    let _add_value=0;
+    if(_use_item(ItemID,1,UUID)){
+        for(const i of ["food","cooked"]){
+            if(_add_value,ItemList[ItemID]["status"][i])
+                _add_value+=ItemList[ItemID]["status"][i]["value"];
+        }
+        _push_log([$f($$l._tag_after_eat_food,ItemList[ItemID].name,_add_value)]);
+    }
+
+}
+function _function_check_can_do(name){
+    const _player_item_list=Object.keys(GET("backpack_items"));
+    for(const i of _player_item_list){
+        if(ItemList[i]["tag"].includes("tool") && ItemList[i]["status"]["tool"]){
+            if(ItemList[i]["status"]["tool"]["available"].includes(name)){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+function _function_open_tinned(ItemID,UUID=void 0){
+    let _item_status;
+    if(isOverlay(ItemID)){
+        _item_status=GET("backpack_items")[ItemID]["status"];
+    }else{
+        _item_status=GET("backpack_items")[ItemID][UUID]["status"];
+    }
+    if(_use_item(ItemID,1,UUID)){
+        _give_item(_item_status["tinned"]["replace"],1);
+    }
 }

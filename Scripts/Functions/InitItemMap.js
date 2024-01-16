@@ -4,7 +4,12 @@ const ItemList={
         "type":"item",
         "overlay":true,
         "tag":["kindling","combustible"],
-        "status":{}
+        "status":{
+            "kindling":{
+                "cost":2,
+                "value":2
+            }
+        }
     },
     "item_wood":{
         "name":$$l.item_wood,
@@ -17,14 +22,33 @@ const ItemList={
         "name":$$l.item_food_tinned_tomato,
         "type":"item",
         "overlay":true,
-        "tag":["food","cookable","tinned"],
+        "tag":["tinned"],
         "status":{
             "tinned":{
-                "remove":"open_tinned",
+                "replace":"item_food_untinned_tomato",
                 "cost":3
             },
+        }
+    },
+    "item_food_untinned_tomato":{
+        "name":$$l.item_food_untinned_tomato,
+        "type":"item",
+        "overlay":false,
+        "tag":["food","cookable","untinned"],
+        "status":{
+            "food":{
+                "cost":2,
+                "value":3,
+            },
+            "cookable":{
+                "cost":16,
+                "add_tag":"cooked"
+            },
+            "untinned":{
+                "value":0
+            },
             "cooked":{
-                "rectification":2,
+                "value":2,
                 "cost":5
             }
         }
@@ -36,10 +60,10 @@ const ItemList={
         "tag":["equipable","tool"],
         "status":{
             "tool":{
-                "available":["craft_kindling","open_tinned"]
+                "available":["craft_kindling","tinned"]
             },
             "weapon":{
-                "rectification":[1]
+                "value":[1]
             }
         }
     }

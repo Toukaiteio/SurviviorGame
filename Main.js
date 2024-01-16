@@ -26,6 +26,7 @@ function Load_Script(link) {
         await Load_Script("./Scripts/Functions/GameEvents.js");
         await Load_Script("./Scripts/Functions/InitItemMap.js");
         await Load_Script("./Scripts/Functions/GameValueInit.js");
+        await Load_Script("./Scripts/Functions/GameTag.js");
         await Load_Script("./Scripts/Functions/Builder.js");
         
         await Load_Script("./Scripts/Controller/SoundController.js");
