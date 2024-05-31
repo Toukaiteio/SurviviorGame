@@ -1,7 +1,7 @@
-const _TStore={};
-function TSTORE(key,value){
-    _TStore[key]=value;
+const _TStore = {};
+function TSTORE(key, value) {
+  _TStore[key] = value;
 }
-function TGET(key){
-    return _TStore[key] || null;
+function TGET(key) {
+  return _TStore[key] || null;
 }
